@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Feedly Map</title>
+  <title>Nostradamus 6.0</title>
   <style>
-    #map { height: 500px; width: 100%; }
+    #map { height: 1000px; width: 100%; }
   </style>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhoLkGlzoNc9P2hMogC5PZDjEWUMMZ68E&callback=initMap" 
-    async 
-    defer
-  ></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhoLkGlzoNc9P2hMogC5PZDjEWUMMZ68E&callback=initMap" async defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <script>
     let map;
@@ -30,19 +27,16 @@
         header: true,
         complete: function(results) {
           results.data.forEach(row => {
-            if (row.Logged === 'log_article' && row.Location) {
-              const locationParts = row.Location.split(',');
-              if (locationParts.length === 2) {
-                const lat = parseFloat(locationParts[0]);
-                const lng = parseFloat(locationParts[1]);
+            if (row["Log to Map"] === 'YES' && row.Latitude && row.Longitude) {
+              const lat = parseFloat(row.Latitude);
+              const lng = parseFloat(row.Longitude);
 
-                if (!isNaN(lat) && !isNaN(lng)) {
-                  new google.maps.Marker({
-                    position: {lat: lat, lng: lng},
-                    map: map,
-                    title: row.Title
-                  });
-                }
+              if (!isNaN(lat) && !isNaN(lng)) {
+                new google.maps.Marker({
+                  position: {lat: lat, lng: lng},
+                  map: map,
+                  title: row.Title
+                });
               }
             }
           });
@@ -52,7 +46,7 @@
   </script>
 </head>
 <body>
-  <h1>Feedly Article Map</h1>
+  <h1>Nostradamus 6.0</h1>
   <div id="map"></div>
 </body>
 </html>
