@@ -1,0 +1,13 @@
+{
+  "name": "feedly-map-logger",
+  "version": "1.0.0",
+  "description": "Logs Feedly articles to Google Sheets",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "google-spreadsheet": "^3.3.0"
+  }
+}
